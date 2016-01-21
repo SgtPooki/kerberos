@@ -46,6 +46,19 @@ void die1(const char *message) {
   exit(1);
 }
 
+// Temporary fix for https://github.com/christkv/kerberos/issues/36
+OM_uint32 KRB5_CALLCONV
+gss_acquire_cred_impersonate_name(
+    OM_uint32 *,            /* minor_status */
+    const gss_cred_id_t,    /* impersonator_cred_handle */
+    const gss_name_t,       /* desired_name */
+    OM_uint32,              /* time_req */
+    const gss_OID_set,      /* desired_mechs */
+    gss_cred_usage_t,       /* cred_usage */
+    gss_cred_id_t *,        /* output_cred_handle */
+    gss_OID_set *,          /* actual_mechs */
+    OM_uint32 *);           /* time_rec */
+    
 static gss_client_response *gss_error(const char *func, const char *op, OM_uint32 err_maj, OM_uint32 err_min);
 static gss_client_response *other_error(const char *fmt, ...);
 static gss_client_response *krb5_ctx_error(krb5_context context, krb5_error_code problem);
